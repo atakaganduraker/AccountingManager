@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<OperationType> OperationTypes { get; set; }
         public DbSet<Ratio> Ratios { get; set; }
 
-
+        public DbSet<Currency> Currencies { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }

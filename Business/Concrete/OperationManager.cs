@@ -1,4 +1,8 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -13,19 +17,27 @@ namespace Business.Concrete
     public class OperationManager : IOperationService
     {
         IOperationDal _operationDal;
+        IOperationTypeService _operationTypeService;
+        ICurrencyService _currencyService;
+        IOperationDetailService _operationDetailService;
+        ICompanyService _companyService;
 
-        public OperationManager(IOperationDal operationDal)
+        public OperationManager(IOperationDal operationDal,IOperationTypeService operationTypeService,ICurrencyService currencyService, IOperationDetailService operationDetailService,ICompanyService companyService)
         {
             _operationDal = operationDal;
+            _operationTypeService = operationTypeService;
+            _currencyService = currencyService;
+            _companyService = companyService;
         }
-
+        [ValidationAspect(typeof(OperationValidator))]
+        [CacheRemoveAspect("IOperationService.Get")]
         public IResult Add(Operation operation)
         {
-          _operationDal.Add(operation);
+
+            _operationDal.Add(operation);
             string id = operation.Id.ToString();
             return new SuccessResult(id + " Başarıyla eklinde ");
         }
-
         public IResult Delete(Operation operation)
         {
                _operationDal.Delete(operation);

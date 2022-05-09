@@ -33,25 +33,14 @@ namespace ConsoleUI
 
             //Console.WriteLine(message.Message);
 
-            OperationManager companyManager = new OperationManager(new EfOperationDal());
-            
-            Operation company = new Operation()
-            {
-                
-                CustomerName="test1",
-                Commission=152,
-                Net=2,
-                OperationNote="Test",
-                Price  =1,
-                IsActive=true,
-                OperationTypeId=1,
-                OperationTime=date,
-                CurrencyId = 1,
-                OperationDetailId = 1,
-                CompanyId = 1
+            CurrencyManager currencyManager = new CurrencyManager(new EfCurrencyDal());
 
+            Currency currency = new Currency()
+            {
+
+                CurrencyName = "USDT"
             };
-            var message = companyManager.Add(company);
+            var message = currencyManager.Add(currency);
 
             Console.WriteLine(message.Message+"23");
 
