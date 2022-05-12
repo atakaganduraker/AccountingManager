@@ -22,12 +22,12 @@ namespace Business.Concrete
         IOperationDetailService _operationDetailService;
         ICompanyService _companyService;
 
-        public OperationManager(IOperationDal operationDal,IOperationTypeService operationTypeService,ICurrencyService currencyService, IOperationDetailService operationDetailService,ICompanyService companyService)
+        public OperationManager(IOperationDal operationDal)
         {
             _operationDal = operationDal;
-            _operationTypeService = operationTypeService;
-            _currencyService = currencyService;
-            _companyService = companyService;
+            //_operationTypeService = operationTypeService;
+            //_currencyService = currencyService;
+            //_companyService = companyService;
         }
         [ValidationAspect(typeof(OperationValidator))]
         [CacheRemoveAspect("IOperationService.Get")]
@@ -56,13 +56,17 @@ namespace Business.Concrete
 
         public IDataResult<List<Operation>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Operation>>(_operationDal.GetAll(),"OLDUU");
         }
-
+ 
+        
+        [CacheAspect]
         public IDataResult<List<Operation>> GetById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Operation>>(_operationDal.GetAll(), "OLDUU");
+
         }
+
 
         public IResult Uptade(Operation operation)
         {

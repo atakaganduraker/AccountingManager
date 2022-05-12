@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +10,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class OperationController : ControllerBase
     {
+        //Loosely coupled
+        //naming convention
 
         IOperationService _operationService;
 
@@ -16,33 +20,33 @@ namespace WebAPI.Controllers
             _operationService = operationService;
         }
 
-        [HttpGet("getall")]
-
+        [HttpGet]
         public IActionResult GetAll()
-            {
-                //Dependency chain--
-                //IProductService productService = new ProductManager(new EfProductDal());
-                Thread.Sleep(1000);
-                var result = _operationService.GetAll();
-                if (result.Success)
-                {
-                    return Ok(result);
-                }
-                return BadRequest(result);
-            }
-
-
-        [HttpPost("add")]
-        public IActionResult Add(Operation operation)
         {
+            //Dependency Chain---
+            var result = _operationService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            
+                return BadRequest(result);
+                                        
+        }
 
-            var result = _operationService.Add(operation);
-
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+            var result = _operationService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
+
+
+
     }
 }

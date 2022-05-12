@@ -1,10 +1,11 @@
-﻿using Business.Concrete;
+﻿using Business.Abstract;
+using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 
 namespace ConsoleUI
-{                                                                                   
+{
     internal class Program
     {
         static void Main(string[] args)
@@ -33,16 +34,22 @@ namespace ConsoleUI
 
             //Console.WriteLine(message.Message);
 
-            CurrencyManager currencyManager = new CurrencyManager(new EfCurrencyDal());
+            //CurrencyManager currencyManager = new CurrencyManager(new EfCurrencyDal());
 
-            Currency currency = new Currency()
-            {
+            //Currency currency = new Currency()
+            //{
 
-                CurrencyName = "USDT"
-            };
-            var message = currencyManager.Add(currency);
+            //    CurrencyName = "USDT"
+            //};
+            //var message = currencyManager.Add(currency);
 
-            Console.WriteLine(message.Message+"23");
+            //Console.WriteLine(message.Message + "23");
+
+
+
+       
+            
+
 
         }
     }
