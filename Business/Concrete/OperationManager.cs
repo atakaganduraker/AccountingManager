@@ -58,12 +58,16 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Operation>>(_operationDal.GetAll(),"OLDUU");
         }
- 
-        
-        [CacheAspect]
-        public IDataResult<List<Operation>> GetById(int id)
+        public IDataResult<List<Operation>> GetAllByCompanyId(int id)
         {
-            return new SuccessDataResult<List<Operation>>(_operationDal.GetAll(), "OLDUU");
+            return new SuccessDataResult<List<Operation>>(_operationDal.GetAll(p => p.CompanyId == id));
+        }
+
+
+        [CacheAspect]
+        public IDataResult<Operation> GetById(int id)
+        {
+            return new SuccessDataResult<Operation>(_operationDal.Get(x => x.Id == id));
 
         }
 
@@ -72,5 +76,7 @@ namespace Business.Concrete
         {
             throw new NotImplementedException();
         }
+
+     
     }
 }

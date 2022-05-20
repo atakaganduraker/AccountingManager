@@ -3,8 +3,8 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string NewsAddedSuccess = "Haber eklendi";
-        public static string NewsAddedError = "Haber eklendi";
+        public static string OperationAddedSuccess = "Operasyon Başarıyla Eklendi";
+        public static string OperationAddedError = "Operasyon Eklenemedi";
         public static string NewsGetAllError = "Bakım zamanında";
         public static string NewsGetAllSuccess = "Haberler listelendi";
         public static string NewsGetBySource = "Ürünler kaynağa göre listelendi.";

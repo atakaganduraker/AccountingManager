@@ -1,8 +1,14 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Business.Constants;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
+using Core.Utilities.Result;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using IResult = Core.Utilities.Result.IResult;
 
 namespace WebAPI.Controllers
 {
@@ -20,7 +26,21 @@ namespace WebAPI.Controllers
             _operationService = operationService;
         }
 
-        [HttpGet]
+        // [ValidationAspect(typeof(ProductValidator))]
+        // [CacheRemoveAspect("IOperationService.Get")] // Db ye  yeni bir ekleme yaptığımızda gidip hazır olan Cacheleri siliyor eski data gelmesin diye.
+        [HttpPost("AddOperation")]
+        public IActionResult Add(Operation product)
+        {
+            var result = _operationService.Add(product);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
             //Dependency Chain---
@@ -33,8 +53,9 @@ namespace WebAPI.Controllers
                 return BadRequest(result);
                                         
         }
+        
 
-        [HttpGet("getbyid")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
             var result = _operationService.GetById(id);
@@ -44,7 +65,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
+        [HttpGet("GetByCompany")]
+        public IActionResult GetByCompany(int companyId)
+        {
+            var result = _operationService.GetByCompanyId(companyId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
 
 

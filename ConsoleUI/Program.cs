@@ -34,8 +34,9 @@ namespace ConsoleUI
 
             //Console.WriteLine(message.Message);
 
-            //CurrencyManager currencyManager = new CurrencyManager(new EfCurrencyDal());
-
+            OperationManager currencyManager = new OperationManager(new EfOperationDal());
+           var resukl= currencyManager.GetById(1);
+            Console.WriteLine(resukl.Message);
             //Currency currency = new Currency()
             //{
 

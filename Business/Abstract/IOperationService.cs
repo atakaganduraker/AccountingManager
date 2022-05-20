@@ -11,7 +11,7 @@ namespace Business.Abstract
     public interface IOperationService
     {
         IDataResult<List<Operation>> GetAll();
-        IDataResult<List<Operation>> GetById(int id);
+        IDataResult<Operation> GetById(int id);
         IResult Add(Operation operation);
         IResult Delete(Operation operation);    
         IResult Uptade(Operation operation); 
