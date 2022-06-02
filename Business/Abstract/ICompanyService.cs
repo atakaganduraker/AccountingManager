@@ -15,5 +15,7 @@ namespace Business.Abstract
         IResult Add(Company company);
         IResult Delete(Company company);
         IResult Uptade(Company  company);
+        IResult DeleteById(int id);
+
     }
 }

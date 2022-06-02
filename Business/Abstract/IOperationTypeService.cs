@@ -15,5 +15,7 @@ namespace Business.Abstract
         IResult Add(OperationType operationType);
         IResult Delete(OperationType operationType);
         IResult Uptade(OperationType operationType);
+        IResult DeleteById(int id);
+
     }
 }

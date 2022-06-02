@@ -37,7 +37,9 @@ namespace ConsoleUI
             OperationManager currencyManager = new OperationManager(new EfOperationDal());
            var resukl= currencyManager.GetById(1);
             Console.WriteLine(resukl.Message);
-            //Currency currency = new Currency()
+              
+            currencyManager.DeleteById(1);
+           //Currency currency = new Currency()
             //{
 
             //    CurrencyName = "USDT"
@@ -48,8 +50,8 @@ namespace ConsoleUI
 
 
 
-       
-            
+
+
 
 
         }

@@ -24,8 +24,8 @@ namespace Business.Concrete
         public IResult Add(Company company)
         {
             _companyDal.Add(company);
-            string id = company.Id.ToString();
-            return new SuccessResult(id + "Başarıyla eklendi");
+            string id = company.CompanyName.ToString();
+            return new SuccessResult(id + " Başarıyla eklendi");
         }
 
         public IResult Delete(Company company)
@@ -33,9 +33,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public IResult DeleteById(int id)
+        {
+            var company = _companyDal.Get(o => o.Id == id);
+
+            _companyDal.Delete(company);
+            return new SuccessResult(id + "Numaralı Şirket Başarıyla silindi ");
+        }
+
         public IDataResult<List<Company>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Company>>(_companyDal.GetAll(), "OLDUU");
         }
 
         public IDataResult<List<Company>> GetById(int id)
@@ -45,7 +53,9 @@ namespace Business.Concrete
 
         public IResult Uptade(Company company)
         {
-            throw new NotImplementedException();
+            _companyDal.Update(company);
+
+            return new SuccessResult(company.Id + " Başarıyla Güncellendi ");
         }
     }
 }

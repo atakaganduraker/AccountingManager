@@ -15,6 +15,7 @@ namespace Business.Abstract
         IResult Add(CaseRatio caseRatio);
         IResult Delete(CaseRatio caseRatio);
         IResult Uptade(CaseRatio caseRatio);
+        IResult DeleteById(int id);
 
     }
 }

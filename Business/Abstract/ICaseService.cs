@@ -15,5 +15,7 @@ namespace Business.Abstract
         IResult Add(Case casee);
         IResult Delete(Case casee);
         IResult Uptade(Case casee);
+        IResult DeleteById(int id);
+
     }
 }

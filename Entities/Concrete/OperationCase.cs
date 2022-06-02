@@ -13,7 +13,5 @@ namespace Entities.Concrete
         public int  OperationId  { get; set; }
         public int CaseId { get; set; }
 
-
-
     }
 }

@@ -11,10 +11,12 @@ namespace Business.Abstract
     public interface IOperationService
     {
         IDataResult<List<Operation>> GetAll();
+        IDataResult<List<Operation>> GetByCompanyId(int id);
         IDataResult<Operation> GetById(int id);
         IResult Add(Operation operation);
         IResult Delete(Operation operation);    
         IResult Uptade(Operation operation); 
         IResult DeleteById(int id);
+
     }
 }

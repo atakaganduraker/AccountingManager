@@ -15,6 +15,8 @@ namespace Business.Abstract
         IResult Add(Currency currency);
         IResult Delete(Currency currency);
         IResult Uptade(Currency currency);
+        IResult DeleteById(int id);
+
     }
 }
 

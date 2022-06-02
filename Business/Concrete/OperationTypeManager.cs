@@ -30,9 +30,18 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public IResult DeleteById(int id)
+        {
+            var operationType = _operationTypenDal.Get(o => o.Id == id);
+
+            _operationTypenDal.Delete(operationType);
+            return new SuccessResult(id + "Numaralı Şirket Başarıyla silindi ");
+        }
+
         public IDataResult<List<OperationType>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<OperationType>>(_operationTypenDal.GetAll(), "OLDUU");
+
         }
 
         public IDataResult<List<OperationType>> GetById(int id)
@@ -42,7 +51,9 @@ namespace Business.Concrete
 
         public IResult Uptade(OperationType operationType)
         {
-            throw new NotImplementedException();
+            _operationTypenDal.Update(operationType);
+
+            return new SuccessResult(operationType.Id + " Başarıyla Güncellendi ");
         }
     }
 }

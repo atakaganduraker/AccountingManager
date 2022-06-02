@@ -9,6 +9,7 @@ using System;
 
 namespace Business.BussinessAspect.Autofac
 {
+    //JWT 
     public class SecuredOperation : MethodInterception
     {
         private string[] _roles;

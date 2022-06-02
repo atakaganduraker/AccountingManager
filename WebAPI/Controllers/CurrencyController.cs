@@ -14,24 +14,25 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OperationController : ControllerBase
+    public class CurrencyController : ControllerBase
     {
         //Loosely coupled
         //naming convention
 
-        IOperationService _operationService;
+        // IOperationService _operationService;
+        ICurrencyService _currencyService;
 
-        public OperationController(IOperationService operationService)
+        public CurrencyController(ICurrencyService currencyService)
         {
-            _operationService = operationService;
+            _currencyService = currencyService;
         }
 
         // [ValidationAspect(typeof(ProductValidator))]
         // [CacheRemoveAspect("IOperationService.Get")] // Db ye  yeni bir ekleme yaptığımızda gidip hazır olan Cacheleri siliyor eski data gelmesin diye.
-        [HttpPost("AddOperation")]
-        public IActionResult Add(Operation operation)
+        [HttpPost("AddCurrency")]
+        public IActionResult Add(Currency currency)
         {
-            var result = _operationService.Add(operation);
+            var result = _currencyService.Add(currency);
 
             if (result.Success)
             {
@@ -39,11 +40,11 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-       
-        [HttpDelete("DeleteOperation")]
-        public IActionResult DeleteById(int  id)
+
+        [HttpDelete("DeleteCompany")]
+        public IActionResult DeleteById(int id)
         {
-            var result = _operationService.DeleteById(id);
+            var result = _currencyService.DeleteById(id);
 
             if (result.Success)
             {
@@ -56,49 +57,26 @@ namespace WebAPI.Controllers
         public IActionResult GetAll()
         {
             //Dependency Chain---
-            var result = _operationService.GetAll();
+            var result = _currencyService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
-            
-                return BadRequest(result);
-                                        
-        }
-        
 
-        [HttpGet("GetById")]
-        public IActionResult GetById(int id)
+            return BadRequest(result);
+
+        }
+
+
+        [HttpPost("UptadeCurrency")]
+        public IActionResult Uptade(Currency currency)
         {
-            var result = _operationService.GetById(id);
+            var result = _currencyService.Uptade(currency);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("GetByCompany")]
-        public IActionResult GetByCompany(int companyId)
-        {
-            var result = _operationService.GetByCompanyId(companyId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpPost("UptadeOperation")]
-        public IActionResult Uptade(Operation operation)
-        {
-            var result = _operationService.Uptade(operation);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-
     }
 }

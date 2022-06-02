@@ -32,9 +32,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public IResult DeleteById(int id)
+        {
+            var operationCase = _operationCaseDal.Get(o => o.Id == id);
+
+            _operationCaseDal.Delete(operationCase);
+            return new SuccessResult(id + "Numaralı Şirket Başarıyla silindi ");
+        }
+
         public IDataResult<List<OperationCase>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<OperationCase>>(_operationCaseDal.GetAll(), "OLDUU");
         }
 
         public IDataResult<List<OperationCase>> GetById(int id)

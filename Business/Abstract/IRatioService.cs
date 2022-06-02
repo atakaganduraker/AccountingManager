@@ -15,5 +15,7 @@ namespace Business.Abstract
         IResult Add(Ratio ratio);
         IResult Delete(Ratio ratio);
         IResult Uptade(Ratio ratio);
+        IResult DeleteById(int id);
+
     }
 }

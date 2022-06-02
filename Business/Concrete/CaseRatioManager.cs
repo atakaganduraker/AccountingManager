@@ -31,9 +31,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public IResult DeleteById(int id)
+        {
+            CaseRatio caseRatio = _caseRatioDal.Get(o => o.Id == id);
+
+            _caseRatioDal.Delete(caseRatio);
+            return new SuccessResult(id + "Numaralı caseRatio Başarıyla silindi ");
+        }
+
         public IDataResult<List<CaseRatio>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<CaseRatio>>(_caseRatioDal.GetAll(), "OLDUU");
         }
 
         public IDataResult<List<CaseRatio>> GetById(int id)
@@ -43,7 +51,9 @@ namespace Business.Concrete
 
         public IResult Uptade(CaseRatio caseRatio)
         {
-            throw new NotImplementedException();
+            _caseRatioDal.Update(caseRatio);
+
+            return new SuccessResult(caseRatio.Id + " Başarıyla Güncellendi ");
         }
     }
 }

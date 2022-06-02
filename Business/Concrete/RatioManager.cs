@@ -30,9 +30,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public IResult DeleteById(int id)
+        {
+            var ratio = _ratioDal.Get(o => o.Id == id);
+
+            _ratioDal.Delete(ratio);
+            return new SuccessResult(id + " Başarıyla silindi ");
+        }
+
         public IDataResult<List<Ratio>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Ratio>>(_ratioDal.GetAll(), "OLDUU");
         }
 
         public IDataResult<List<Ratio>> GetById(int id)
@@ -42,7 +50,9 @@ namespace Business.Concrete
 
         public IResult Uptade(Ratio ratio)
         {
-            throw new NotImplementedException();
+            _ratioDal.Update(ratio);
+
+            return new SuccessResult(ratio.Id + " Başarıyla Güncellendi ");
         }
     }
 }

@@ -14,24 +14,25 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OperationController : ControllerBase
+    public class CompanyController : ControllerBase
     {
         //Loosely coupled
         //naming convention
 
-        IOperationService _operationService;
+       // IOperationService _operationService;
+        ICompanyService _companyService;
 
-        public OperationController(IOperationService operationService)
+        public CompanyController(ICompanyService companyService)
         {
-            _operationService = operationService;
+            _companyService = companyService;
         }
 
         // [ValidationAspect(typeof(ProductValidator))]
         // [CacheRemoveAspect("IOperationService.Get")] // Db ye  yeni bir ekleme yaptığımızda gidip hazır olan Cacheleri siliyor eski data gelmesin diye.
-        [HttpPost("AddOperation")]
-        public IActionResult Add(Operation operation)
+        [HttpPost("AddCompany")]
+        public IActionResult Add(Company company)
         {
-            var result = _operationService.Add(operation);
+            var result = _companyService.Add(company);
 
             if (result.Success)
             {
@@ -39,11 +40,11 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-       
-        [HttpDelete("DeleteOperation")]
-        public IActionResult DeleteById(int  id)
+
+        [HttpDelete("DeleteCompany")]
+        public IActionResult DeleteById(int id)
         {
-            var result = _operationService.DeleteById(id);
+            var result = _companyService.DeleteById(id);
 
             if (result.Success)
             {
@@ -56,49 +57,26 @@ namespace WebAPI.Controllers
         public IActionResult GetAll()
         {
             //Dependency Chain---
-            var result = _operationService.GetAll();
+            var result = _companyService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
-            
-                return BadRequest(result);
-                                        
-        }
-        
 
-        [HttpGet("GetById")]
-        public IActionResult GetById(int id)
+            return BadRequest(result);
+
+        }
+
+        [HttpPost("UptadeCompany")]
+        public IActionResult Uptade(Company company)
         {
-            var result = _operationService.GetById(id);
+            var result = _companyService.Uptade(company);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("GetByCompany")]
-        public IActionResult GetByCompany(int companyId)
-        {
-            var result = _operationService.GetByCompanyId(companyId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpPost("UptadeOperation")]
-        public IActionResult Uptade(Operation operation)
-        {
-            var result = _operationService.Uptade(operation);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-
     }
+
 }

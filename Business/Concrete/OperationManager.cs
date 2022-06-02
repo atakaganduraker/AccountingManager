@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BussinessAspect.Autofac;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
@@ -29,15 +30,23 @@ namespace Business.Concrete
             //_currencyService = currencyService;
             //_companyService = companyService;
         }
+        
+        
+        
+        
+        
         [ValidationAspect(typeof(OperationValidator))]
         [CacheRemoveAspect("IOperationService.Get")]
         public IResult Add(Operation operation)
         {
+            
+                _operationDal.Add(operation);
+                string id = operation.Id.ToString();
+                return new SuccessResult(id + " Başarıyla eklinde ");
+            
 
-            _operationDal.Add(operation);
-            string id = operation.Id.ToString();
-            return new SuccessResult(id + " Başarıyla eklinde ");
         }
+        [SecuredOperation("Operation.Delete,Admin")]
         public IResult Delete(Operation operation)
         {
                _operationDal.Delete(operation);
@@ -47,9 +56,9 @@ namespace Business.Concrete
         }
         public IResult DeleteById(int id)
         {
-            var entity = _operationDal.Get(o => o.Id == id);
+            var operation = _operationDal.Get(o => o.Id == id);
 
-            _operationDal.Delete(entity);
+            _operationDal.Delete(operation);
             return new SuccessResult(id + " Başarıyla silindi ");
 
         }
@@ -58,11 +67,12 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Operation>>(_operationDal.GetAll(),"OLDUU");
         }
-        public IDataResult<List<Operation>> GetAllByCompanyId(int id)
+    
+
+        public IDataResult<List<Operation>> GetByCompanyId(int id)
         {
             return new SuccessDataResult<List<Operation>>(_operationDal.GetAll(p => p.CompanyId == id));
         }
-
 
         [CacheAspect]
         public IDataResult<Operation> GetById(int id)
@@ -74,9 +84,15 @@ namespace Business.Concrete
 
         public IResult Uptade(Operation operation)
         {
-            throw new NotImplementedException();
+
+          //  var _operation =(_operationDal.Get(x => x.Id == operation.Id);
+
+
+            _operationDal.Update(operation);
+
+            return new SuccessResult(operation.Id + " Başarıyla Güncellendi ");
         }
 
-     
+
     }
 }

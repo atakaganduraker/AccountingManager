@@ -20,14 +20,10 @@ namespace Business.Constants
         public static string CategoryGetAllSuccess = "Bütün kategoriler listelendi";
         public static string SourceGetAllSuccess = "Kaynakların hepsi listelendi.";
         public static string SourceAdded = " Kaynak eklendi";
-        public static string CategoryAdded = "Kategori Eklendi.";
-        public static string NewsSourceAdded = "Kategori haber ile ilişkilendirildi.";
-        public static string DeletedNewsCompany= "Haberden şirket bilgisi silindi";
-        public static string AddedNewsCompany= "Habere şirket bilgisi eklendi";
-        public static string UpdatedNewsCompany= "Haberden  şirket bilgisi güncellendi";
+      
+
         public static string AddedCompany="Şirket başarılı bir şekilde eklendi.";
-        public static string NewsGetByEditorId = "Editor id ye  göre listelendi.";
-        public static string DeletedNews= "Haber soft silindi.";
+   
 
         public static string NewNewsSendedServer="Yeni haber ideale gönderildi.";
         public static string CouldNotSendNewNewsToServer="Yeni haber ideale gönderilemedi.";

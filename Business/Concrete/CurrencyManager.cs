@@ -32,9 +32,17 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public IResult DeleteById(int id)
+        {
+            var currency = _currencyDal.Get(o => o.Id == id);
+
+            _currencyDal.Delete(currency);
+            return new SuccessResult(id + "Numaralı Şirket Başarıyla silindi ");
+        }
+
         public IDataResult<List<Currency>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Currency>>(_currencyDal.GetAll(), "OLDUU");
         }
 
         public IDataResult<List<Currency>> GetById(int id)
@@ -46,7 +54,9 @@ namespace Business.Concrete
 
         public IResult Uptade(Currency currency)
         {
-            throw new NotImplementedException();
+            _currencyDal.Update(currency);
+
+            return new SuccessResult(currency.Id + " Başarıyla Güncellendi ");
         }
     }
 }
