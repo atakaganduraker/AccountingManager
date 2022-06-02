@@ -37,6 +37,8 @@ namespace Business.Concrete
         
         [ValidationAspect(typeof(OperationValidator))]
         [CacheRemoveAspect("IOperationService.Get")]
+        [SecuredOperation("Operation.Add,Admin")]
+
         public IResult Add(Operation operation)
         {
             
