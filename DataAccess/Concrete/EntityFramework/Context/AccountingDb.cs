@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-8GED7AK\SQLEXPRESS;Database=AccountingDb;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=AccountingDb;Trusted_Connection=true");
         }
         //8
         public DbSet<Case> Cases { get; set; }
